@@ -1,6 +1,13 @@
 import PySimpleGUI as sg
 
-layout = [[]]
+image_col = sg.Column([])
+info_col = sg.Column([
+    
+    ])
+layout = [
+    [sg.Input(expand_x=True, key='-INPUT-'), sg.Button('Enter')],
+    [image_col, info_col]
+    ]
 
 window = sg.Window('Weather', layout)
 
