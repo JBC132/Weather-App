@@ -17,5 +17,11 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
+    if event == 'Enter':
+        window['-LOCATION-'].update('test', visible = True)
+        window['-TIME-'].update('test', visible = True)
+        window['-TEMP-'].update('test', visible = True)
+        window['-IMAGE-'].update()
 
+        
 window.close()
