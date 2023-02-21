@@ -1,8 +1,14 @@
 import PySimpleGUI as sg
+from bs4 import BeautifulSoup as bs
+import requests
 
+def get_weather_data(location):
+    pass
+
+sg.theme('reddit')
 image_col = sg.Column([[sg.Text(key='-IMAGE-', background_color='#FFFFFF')]])
 info_col = sg.Column([
-    [sg.Text('',key='-LOCATION-', font = 'Calibri 16', background_color='#000000', text_color='#FFFFFF', pad = 0, visible=False)],
+    [sg.Text('',key='-LOCATION-', font = 'Calibri 16', background_color='#FF0000', text_color='#FFFFFF', pad = 0, visible=False)],
     [sg.Text('',key='-TIME-', font = 'Calibri 16', background_color='#000000', text_color='#FFFFFF', pad = 0, visible=False)],
     [sg.Text('',key='-TEMP-', font = 'Calibri 16', background_color='#FFFFFF', text_color='#000000', pad = (0,10), justification='center', visible=False)]
     ])
