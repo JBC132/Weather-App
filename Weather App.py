@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 
 def get_weather_data(location):
-    pass
+    url = f"https://www.google.com/search?q=weather+{location.replace(' ','')}"
 
 sg.theme('reddit')
 image_col = sg.Column([[sg.Text(key='-IMAGE-', background_color='#FFFFFF')]])
@@ -24,6 +24,7 @@ while True:
     if event == sg.WIN_CLOSED:
         break
     if event == 'Enter':
+        get_weather_data(values['-INPUT-'])
         window['-LOCATION-'].update('test', visible = True)
         window['-TIME-'].update('test', visible = True)
         window['-TEMP-'].update('test', visible = True)
