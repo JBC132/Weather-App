@@ -4,6 +4,11 @@ import requests
 
 def get_weather_data(location):
     url = f"https://www.google.com/search?q=weather+{location.replace(' ','')}"
+    session = requests.Session()
+    session.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+    html = session.get(url)
+
+    soup = bs(html.text, 'html.parser')
 
 sg.theme('reddit')
 image_col = sg.Column([[sg.Text(key='-IMAGE-', background_color='#FFFFFF')]])
