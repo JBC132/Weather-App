@@ -9,6 +9,11 @@ def get_weather_data(location):
     html = session.get(url)
 
     soup = bs(html.text, 'html.parser')
+    name = soup.find('div', attrs={'id': 'wob_loc'}).text
+    time = soup.find('div', attrs={'id': 'wob_dts'}).text
+    weather = soup.find('span', attrs={'id': 'wob_dc'}).text
+    temp = soup.find('span', attrs={'id': 'wob_tm'}).text
+    return name, time, weather, temp
 
 sg.theme('reddit')
 image_col = sg.Column([[sg.Text(key='-IMAGE-', background_color='#FFFFFF')]])
@@ -29,10 +34,10 @@ while True:
     if event == sg.WIN_CLOSED:
         break
     if event == 'Enter':
-        get_weather_data(values['-INPUT-'])
-        window['-LOCATION-'].update('test', visible = True)
-        window['-TIME-'].update('test', visible = True)
-        window['-TEMP-'].update('test', visible = True)
+        name, time, weather, temp = get_weather_data(values['-INPUT-'])
+        window['-LOCATION-'].update(name, visible = True)
+        window['-TIME-'].update(time, visible = True)
+        window['-TEMP-'].update(temp, visible = True)
         window['-IMAGE-'].update()
 
         
