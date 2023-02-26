@@ -33,12 +33,29 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
+
     if event == 'Enter':
         name, time, weather, temp = get_weather_data(values['-INPUT-'])
         window['-LOCATION-'].update(name, visible = True)
-        window['-TIME-'].update(time, visible = True)
-        window['-TEMP-'].update(temp, visible = True)
-        window['-IMAGE-'].update()
+        window['-TIME-'].update(time.split(' ')[0], visible = True)
+        window['-TEMP-'].update(f'{temp} \u2103 ({weather})', visible = True)
 
+        if weather in ('맑음','Sunny','Clear','Clear with periodic clouds', 'Mostly sunny'):
+            window['-IMAGE-'].update('symbols/sun.png')
+	    
+        if weather in ('Partly Sunny','Mostly Sunny','Partly cloudy','Mostly cloudy','Cloudy','Overcast'):
+            window['-IMAGE-'].update('symbols/part sun.png')
+        
+        if weather in ('Rain','Chance of Rain','Light Rain','Showers','Scattered Showers','Rain and Snow','Hail'):
+            window['-IMAGE-'].update('symbols/rain.png')
+        
+        if weather in ('Scattered Thunderstorms','Chance of Storm','Storm','Thunderstorm','Chance of TStorm'):
+            window['-IMAGE-'].update('symbols/thunder.png')
+        
+        if weather in ('Mist','Dust','Fog','Smoke','Haze','Flurries'):
+            window['-IMAGE-'].update('symbols/fog.png')
+        
+        if weather in ('Freezing Drizzle','Chance of Snow','Sleet','Snow','Icy','Snow Showers'):
+            window['-IMAGE-'].update('symbols/snow.png')
         
 window.close()
