@@ -15,18 +15,25 @@ def get_weather_data(location):
     temp = soup.find('span', attrs={'id': 'wob_tm'}).text
     return name, time, weather, temp
 
-sg.theme('reddit')
-image_col = sg.Column([[sg.Text(key='-IMAGE-', background_color='#FFFFFF')]])
+
+image_col = sg.Column([
+    [sg.Text(key='-IMAGE-', background_color='#FFFFFF')]],
+    key = '-LEFT-',
+    background_color='#FFFFFF')
+
 info_col = sg.Column([
     [sg.Text('',key='-LOCATION-', font = 'Calibri 16', background_color='#FF0000', text_color='#FFFFFF', pad = 0, visible=False)],
     [sg.Text('',key='-TIME-', font = 'Calibri 16', background_color='#000000', text_color='#FFFFFF', pad = 0, visible=False)],
     [sg.Text('',key='-TEMP-', font = 'Calibri 16', background_color='#FFFFFF', text_color='#000000', pad = (0,10), justification='center', visible=False)]
-    ])
+    ], key = '-RIGHT-',
+    background_color='#FFFFFF')
+
 layout = [
     [sg.Input(expand_x=True, key='-INPUT-'), sg.Button('Enter')],
     [image_col, info_col]
     ]
 
+sg.theme('reddit')
 window = sg.Window('Weather', layout)
 
 while True:
@@ -43,7 +50,7 @@ while True:
         if weather in ('맑음','Sunny','Clear','Clear with periodic clouds', 'Mostly sunny'):
             window['-IMAGE-'].update('symbols/sun.png')
 	    
-        if weather in ('Partly Sunny','Mostly Sunny','Partly cloudy','Mostly cloudy','Cloudy','Overcast'):
+        if weather in ('맑으나 때때로 구름', 'Partly Sunny','Mostly Sunny','Partly cloudy','Mostly cloudy','Cloudy','Overcast'):
             window['-IMAGE-'].update('symbols/part sun.png')
         
         if weather in ('Rain','Chance of Rain','Light Rain','Showers','Scattered Showers','Rain and Snow','Hail'):
