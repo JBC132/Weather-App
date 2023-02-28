@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup as bs
 import requests
 
 def get_weather_data(location):
+    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
     url = f"https://www.google.com/search?q=weather+{location.replace(' ','')}"
     session = requests.Session()
-    session.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+    session.headers['User-Agent'] = USER_AGENT
     html = session.get(url)
 
     soup = bs(html.text, 'html.parser')
@@ -50,7 +51,7 @@ while True:
         if weather in ('맑음','Sunny','Clear','Clear with periodic clouds', 'Mostly sunny'):
             window['-IMAGE-'].update('symbols/sun.png')
 	    
-        if weather in ('맑으나 때때로 구름', 'Partly Sunny','Mostly Sunny','Partly cloudy','Mostly cloudy','Cloudy','Overcast'):
+        if weather in ('맑으나 때때로 구름', 'Partly Sunny','Mostly Sunny','구름 조금','Mostly cloudy','Cloudy','Overcast'):
             window['-IMAGE-'].update('symbols/part sun.png')
         
         if weather in ('Rain','Chance of Rain','Light Rain','Showers','Scattered Showers','Rain and Snow','Hail'):
